@@ -15,7 +15,8 @@ class OfficerController extends Controller
      */
     public function index()
     {
-        //
+        $data['officer'] = officer::get();
+        return view('officer.index')->with($data);
     }
 
     /**
@@ -36,7 +37,9 @@ class OfficerController extends Controller
      */
     public function store(StoreofficerRequest $request)
     {
-        //
+        officer::create($request->all());
+
+        return redirect('officer')->with('success', 'Input data petugas berhasil!');
     }
 
     /**
@@ -70,7 +73,9 @@ class OfficerController extends Controller
      */
     public function update(UpdateofficerRequest $request, officer $officer)
     {
-        //
+        $officer->update($request->all());
+
+        return redirect('officer')->with('success', 'Success !! The officer data has been updated');
     }
 
     /**
@@ -81,6 +86,8 @@ class OfficerController extends Controller
      */
     public function destroy(officer $officer)
     {
-        //
+        $officer->delete();
+
+        return redirect('officer')->with('success', 'Delete data Petugas berhasil!');
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\siswa;
 use App\Http\Requests\StoresiswaRequest;
 use App\Http\Requests\UpdatesiswaRequest;
+use App\Models\grade;
+use App\Models\spp;
 
 class SiswaController extends Controller
 {
@@ -15,7 +17,11 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        //
+        $data['siswa'] = siswa::select('grade.nama_kelas', 'spp.tahun', 'siswa.*')->leftJoin
+        ('grade', 'grade.id', 'siswa.id_kelas')->leftJoin('spp', 'spp.id', 'siswa.id_spp')->get();
+        $data['grade'] = grade::get();
+        $data['spp'] = spp::get();
+        return view('siswa.index')->with($data);
     }
 
     /**

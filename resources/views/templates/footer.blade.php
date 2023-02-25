@@ -16,7 +16,17 @@
 <script src="{{asset ('projek') }}/vendor/pg-calendar/js/pignose.calendar.min.js"></script>
 
 
-<script src="{{asset ('projek') }}/js/dashboard/dashboard-2.js"></script>
+{{-- <script src="{{asset ('projek') }}/js/dashboard/dashboard-2.js"></script> --}}
+
+<!-- Datatable -->
+<script src="{{asset ('projek') }}/vendor/datatables/js/jquery.dataTables.min.js"></script>
+
+<script src="{{asset ('projek') }}/js/plugins-init/datatables.init.js"></script>
+
+<script src="{{asset ('projek') }}/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="{{asset ('projek') }}/js/sweetalert2.all.min.js"></script>
+{{-- <script src="{{asset ('projek') }}/js/plugins-init/sweetalert.init.js"></script> --}}
+
 @stack('js')
 <!-- Circle progress -->
 

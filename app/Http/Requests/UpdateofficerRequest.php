@@ -13,7 +13,7 @@ class UpdateofficerRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,26 @@ class UpdateofficerRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'username' => 'required',
+            'password' => 'required',
+            'nama_petugas' => 'required',
+            'level' => 'required',
+            'jk' => 'required',
+            'no_telp' => 'required',
+            'alamat' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'username.required' => 'Username belum diisi!',
+            'password.required' => 'Password belum diisi!',
+            'nama_petugas.required' => 'Nama belum diisi!',
+            'level.required' => 'Level belum dipilih!',
+            'jk.required' => 'Jenis Kelamin belum diisi!',
+            'no_telp.required' => 'Nomor Telepon belum diisi!',
+            'alamat.required' => 'Alamat belum diisi!',
         ];
     }
 }

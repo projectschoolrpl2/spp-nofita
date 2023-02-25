@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class officer extends Model
 {
     use HasFactory;
+
+    protected $table = 'officer';
+
+    protected $fillable = ['username', 'password', 'nama_petugas', 'level', 'jk',
+    'no_telp', 'alamat'];
 }
