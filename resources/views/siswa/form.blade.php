@@ -28,10 +28,10 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="nama_petugas" class="col-sm-4 col-form-label">Nama</label>
+                        <label for="nama" class="col-sm-4 col-form-label">Nama</label>
                         <div class="col-sm-8">
-                            <input type="text" id="nama_petugas" class="form-control" 
-                            placeholder="nama" name="nama_petugas">
+                            <input type="text" id="nama" class="form-control" 
+                            placeholder="nama" name="nama">
                         </div>
                     </div>
 

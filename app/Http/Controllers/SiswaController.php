@@ -78,7 +78,9 @@ class SiswaController extends Controller
      */
     public function update(UpdatesiswaRequest $request, siswa $siswa)
     {
-        //
+        $siswa->update($request->all());
+
+        return redirect('siswa')->with('success', 'Success !! The student data has been updated');
     }
 
     /**
@@ -89,6 +91,8 @@ class SiswaController extends Controller
      */
     public function destroy(siswa $siswa)
     {
-        //
+        $siswa->delete();
+
+        return redirect('siswa')->with('success', 'Delete student information correctly finished!');
     }
 }
