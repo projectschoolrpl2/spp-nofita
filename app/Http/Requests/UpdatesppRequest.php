@@ -13,7 +13,7 @@ class UpdatesppRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class UpdatesppRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'tahun' => 'required',
+            'nominal' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'tahun.required' => 'Data tahun belum diisi!',
+            'nominal.required' => 'Data nominal belum diisi!'
         ];
     }
 }
