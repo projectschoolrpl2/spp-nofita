@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class spp extends Model
 {
     use HasFactory;
+    protected $table = 'spp';
+    protected $fillable = ['tahun', 'nominal'];
 }

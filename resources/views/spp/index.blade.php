@@ -10,7 +10,7 @@
                 <div class="col-sm-6 p-md-0">
                     <div class="welcome-text">
                         <h4>Hi, welcome to</h4>
-                        <p class="mb-0">Officer Pages</p>
+                        <p class="mb-0">SPP Pages</p>
                     </div>
                 </div>
 

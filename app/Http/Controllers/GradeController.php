@@ -15,7 +15,8 @@ class GradeController extends Controller
      */
     public function index()
     {
-        //
+        $data['grade'] = grade::get();
+        return view('grade.index')->with($data);
     }
 
     /**
@@ -36,7 +37,9 @@ class GradeController extends Controller
      */
     public function store(StoregradeRequest $request)
     {
-        //
+        grade::create($request->all());
+
+        return redirect('grade')->with('success', 'Input data kelas berhasil dilakukan!');
     }
 
     /**
@@ -70,7 +73,9 @@ class GradeController extends Controller
      */
     public function update(UpdategradeRequest $request, grade $grade)
     {
-        //
+        $grade->update($request->all());
+
+        return redirect('grade')->with('success', 'Success !! The class data has been updated');
     }
 
     /**
@@ -81,6 +86,8 @@ class GradeController extends Controller
      */
     public function destroy(grade $grade)
     {
-        //
+        $grade->delete();
+
+        return redirect('grade')->with('success', 'Delete data Kelas berhasil!');
     }
 }
