@@ -6,9 +6,49 @@ use App\Http\Controllers\OfficerController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\SppController;
+use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\LaporanController;
+
+use App\Http\Controllers\LoginController;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::resource('officer', OfficerController::class);
 Route::resource('siswa', SiswaController::class);
 Route::resource('grade', GradeController::class);
 Route::resource('spp', SppController::class);
+Route::resource('pembayaran', PembayaranController::class);
+
+Route::get('history', [HistoryController::class, 'index']);
+Route::get('laporan', [LaporanController::class, 'index']);
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('home', [HomeController::class, 'index']);
+});
+
+Route::get('login', [LoginController::class, 'index'])->name('login');
+Route::post('login', [LoginController::class, 'authenticate']);
+Route::post('logout', [LoginController::class, 'logout']);
+
+Route::group(['prefix'=>'a', 'middleware'=>['isAdmin', 'auth']], function(){
+    Route::get('/', [HomeController::class, 'index'])->name('a.home');
+    Route::resource('officer', OfficerController::class);
+    Route::resource('siswa', SiswaController::class);
+    Route::resource('grade', GradeController::class);
+    Route::resource('spp', SppController::class);
+    Route::resource('pembayaran', PembayaranController::class);
+    Route::get('history', [HistoryController::class, 'index']);
+    Route::get('laporan', [LaporanController::class, 'index']);
+});
+
+Route::group(['prefix' => 'p', 'middleware' => ['isPetugas', 'auth']], function(){
+    Route::get('/', [HomeController::class, 'index'])->name('p.home');
+    Route::resource('pembayaran', PembayaranController::class);
+    Route::get('history', [HistoryController::class, 'index']);
+});
+
+Route::group(['prefix' => 's', 'middleware' => ['isSiswa', 'auth']], function(){
+    Route::get('/', [HomeController::class, 'index'])->name('s.home');
+    Route::resource('pembayaran', PembayaranController::class);
+    Route::get('history', [HistoryController::class, 'index']);
+});
