@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\pembayaran;
 use App\Http\Requests\StorepembayaranRequest;
 use App\Http\Requests\UpdatepembayaranRequest;
+use App\Models\siswa;
 
 class PembayaranController extends Controller
 {
@@ -15,7 +16,12 @@ class PembayaranController extends Controller
      */
     public function index()
     {
-        //
+        return view('pembayaran.index');
+    }
+
+    public function form(){
+        $data['siswa'] = siswa::all();
+        return view('pembayaran.form', $data);
     }
 
     /**

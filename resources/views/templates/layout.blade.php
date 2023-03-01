@@ -16,6 +16,9 @@
     <link href="{{asset ('projek') }}/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- Datatable -->
     <link href="{{asset ('projek') }}/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!-- Pick date -->
+    <link rel="stylesheet" href="{{asset ('projek') }}/vendor/pickadate/themes/default.css">
+    <link rel="stylesheet" href="{{asset ('projek') }}/vendor/pickadate/themes/default.date.css">
     @stack('css')
 
 </head>

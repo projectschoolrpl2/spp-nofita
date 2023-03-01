@@ -24,17 +24,25 @@
                                 <div class="auth-form">
                                     <h3 class="text-center mb-4"><b>Login - SPP</b></h3>
                                     <h4 class="text-center mb-4">Sign in your account</h4>
-                                    <form action="login" method="post">
+                                    <form action="login" method="post" novalidate>
                                         @csrf
                                         <div class="form-group">
                                             <label><strong>Username</strong></label>
-                                            <input type="text" class="form-control" placeholder="username"
+                                            <input type="text" class="form-control"
+                                                @error('username')
+                                                    is-invalid
+                                                @enderror
+                                             placeholder="username"
                                             name="username">
                                         </div>
 
                                         <div class="form-group">
                                             <label><strong>Password</strong></label>
-                                            <input type="password" class="form-control" placeholder="password"
+                                            <input type="password" class="form-control" 
+                                                @error('password')
+                                                    is-invalid
+                                                @enderror
+                                            placeholder="password"
                                             name="password">
                                         </div>
 

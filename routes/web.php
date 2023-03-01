@@ -18,37 +18,58 @@ Route::resource('siswa', SiswaController::class);
 Route::resource('grade', GradeController::class);
 Route::resource('spp', SppController::class);
 Route::resource('pembayaran', PembayaranController::class);
+Route::get('/form', [PembayaranController::class, 'form']);
 
 Route::get('history', [HistoryController::class, 'index']);
 Route::get('laporan', [LaporanController::class, 'index']);
 
-Route::middleware(['auth'])->group(function(){
-    Route::get('home', [HomeController::class, 'index']);
+Route::get('/', [LoginController::class, 'index'])->middleware('auth');
+Route::get('home', [LoginController::class, 'index'])->middleware('auth                             ');
+
+Route::controller(LoginController::class)->group(function(){
+    // login
+    Route::get('login', [LoginController::class, 'index'])->name('login');
+    Route::post('login', [LoginController::class, 'authenticate']);
+    Route::post('logout', [LoginController::class, 'logout']);
 });
 
-Route::get('login', [LoginController::class, 'index'])->name('login');
-Route::post('login', [LoginController::class, 'authenticate']);
-Route::post('logout', [LoginController::class, 'logout']);
+Route::group(['middleware' => ['auth']], function(){
+    // Route::get('home', [HomeController::class, 'index']);
 
-Route::group(['prefix'=>'a', 'middleware'=>['isAdmin', 'auth']], function(){
-    Route::get('/', [HomeController::class, 'index'])->name('a.home');
-    Route::resource('officer', OfficerController::class);
-    Route::resource('siswa', SiswaController::class);
-    Route::resource('grade', GradeController::class);
-    Route::resource('spp', SppController::class);
-    Route::resource('pembayaran', PembayaranController::class);
-    Route::get('history', [HistoryController::class, 'index']);
-    Route::get('laporan', [LaporanController::class, 'index']);
+    // route untuk admin
+    Route::group(['prefix'=>'a', 'middleware'=>['isAdmin', 'auth']], function(){
+        Route::get('/', [HomeController::class, 'index'])->name('a.home');
+        Route::resource('officer', OfficerController::class);
+        Route::resource('siswa', SiswaController::class);
+        Route::resource('grade', GradeController::class);
+        Route::resource('spp', SppController::class);
+        Route::resource('pembayaran', PembayaranController::class);
+        Route::get('history', [HistoryController::class, 'index']);
+        Route::get('laporan', [LaporanController::class, 'index']);
+    });    
+
+    // route untuk petugas
+    Route::group(['prefix' => 'p', 'middleware' => ['isPetugas', 'auth']], function(){
+        Route::get('/', [HomeController::class, 'index'])->name('p.home');
+        Route::resource('pembayaran', PembayaranController::class);
+        Route::get('history', [HistoryController::class, 'index']);
+    });
+
+    // route untuk siswa
+    Route::group(['prefix' => 's', 'middleware' => ['isSiswa', 'auth']], function(){
+        Route::get('/', [HomeController::class, 'index'])->name('s.home');
+        Route::resource('pembayaran', PembayaranController::class);
+        Route::get('history', [HistoryController::class, 'index']);
+    });
+
 });
 
-Route::group(['prefix' => 'p', 'middleware' => ['isPetugas', 'auth']], function(){
-    Route::get('/', [HomeController::class, 'index'])->name('p.home');
-    Route::resource('pembayaran', PembayaranController::class);
-    Route::get('history', [HistoryController::class, 'index']);
-});
 
-Route::group(['prefix' => 's', 'middleware' => ['isSiswa', 'auth']], function(){
-    Route::get('/', [HomeController::class, 'index'])->name('s.home');
-    Route::resource('pembayaran', PembayaranController::class);
-    Route::get('history', [HistoryController::class, 'index']);
-});
+
+
+
+
+
+
+   
+    

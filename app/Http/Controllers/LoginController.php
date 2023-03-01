@@ -34,7 +34,7 @@ class LoginController extends Controller
 
         return back()->withErrors([
             'username' => 'Username or Password is wrong',
-        ]);
+        ])->onlyInput('username');
     }
 
     public function logout(Request $request){

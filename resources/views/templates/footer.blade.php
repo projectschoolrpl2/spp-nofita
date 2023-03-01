@@ -27,6 +27,14 @@
 <script src="{{asset ('projek') }}/js/sweetalert2.all.min.js"></script>
 {{-- <script src="{{asset ('projek') }}/js/plugins-init/sweetalert.init.js"></script> --}}
 
+ <!-- pickdate -->
+ <script src="{{asset ('projek') }}/vendor/pickadate/picker.js"></script>
+ <script src="{{asset ('projek') }}/vendor/pickadate/picker.time.js"></script>
+ <script src="{{asset ('projek') }}/vendor/pickadate/picker.date.js"></script>
+
+ <!-- Pickdate -->
+ <script src="{{asset ('projek') }}/js/plugins-init/pickadate-init.js"></script>
+
 @stack('js')
 <!-- Circle progress -->
 
