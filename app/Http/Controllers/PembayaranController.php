@@ -6,6 +6,7 @@ use App\Models\pembayaran;
 use App\Http\Requests\StorepembayaranRequest;
 use App\Http\Requests\UpdatepembayaranRequest;
 use App\Models\siswa;
+use App\Models\spp;
 
 class PembayaranController extends Controller
 {
@@ -21,6 +22,7 @@ class PembayaranController extends Controller
 
     public function form(){
         $data['siswa'] = siswa::all();
+        $data['spp'] = spp::all();
         return view('pembayaran.form', $data);
     }
 

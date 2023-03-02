@@ -6,6 +6,12 @@ use App\Models\spp;
 use App\Http\Requests\StoresppRequest;
 use App\Http\Requests\UpdatesppRequest;
 
+// use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SppExport;
+use App\Http\Controllers\Controller;
+use App\Imports\SppImport;
+
 class SppController extends Controller
 {
     
@@ -55,5 +61,16 @@ class SppController extends Controller
         $spp->delete();
 
         return redirect('spp')->with('success', 'Delete data spp berhasil dilakukan!');
+    }
+
+    public function exportData(){
+        $date = date('Y-m-d');
+        return Excel::download(new SppExport, $date.'_spp.xlsx');
+    }
+
+    public function importData(){
+        Excel::import(new SppImport, request()->file('import'));
+
+        return redirect('spp')->with('success', 'Import data SPP berhasil!');
     }
 }

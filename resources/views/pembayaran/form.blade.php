@@ -38,9 +38,9 @@
                             <select id="id_spp" class="form-select col-sm-8 col-xs-12 col-md-6" 
                             name="id_spp" style="height: 38px; margin-left:10px" >
                             <option selected disabled>Pilih Tahun</option>
-                                {{-- @foreach ($spp as $sp)
+                                @foreach ($spp as $sp)
                                     <option value="{{ $sp->id }}">{{ $sp->tahun }}</option>
-                                @endforeach --}}
+                                @endforeach
                             </select>
                         </div>
             
@@ -75,8 +75,9 @@
                             </label>
                     
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" class="form-control col-md-12 col-xs-12" id="kode-pelanggan" 
-                                placeholder="" readonly name="no_faktur">
+                                <input type="text" class="form-control col-md-12 col-xs-12" id="nominal" 
+                                placeholder="" readonly name="nominal" 
+                                value="">
                             </div>
                         </div>
             

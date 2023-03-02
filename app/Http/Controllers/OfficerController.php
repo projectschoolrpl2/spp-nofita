@@ -6,6 +6,9 @@ use App\Models\officer;
 use App\Http\Requests\StoreofficerRequest;
 use App\Http\Requests\UpdateofficerRequest;
 
+use App\Exports\officerExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class OfficerController extends Controller
 {
     /**
@@ -17,6 +20,11 @@ class OfficerController extends Controller
     {
         $data['officer'] = officer::get();
         return view('officer.index')->with($data);
+    }
+
+    public function export() 
+    {
+        return Excel::download(new officerExport, 'officer.xlsx');
     }
 
     /**

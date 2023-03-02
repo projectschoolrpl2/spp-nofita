@@ -23,6 +23,10 @@ Route::get('/form', [PembayaranController::class, 'form']);
 Route::get('history', [HistoryController::class, 'index']);
 Route::get('laporan', [LaporanController::class, 'index']);
 
+// export import
+Route::get('spp-export', [SppController::class, 'exportData'])->name('spp.export');
+Route::post('spp-import', [SppController::class, 'importData'])->name('spp.import');
+
 Route::get('/', [LoginController::class, 'index'])->middleware('auth');
 Route::get('home', [LoginController::class, 'index'])->middleware('auth                             ');
 
