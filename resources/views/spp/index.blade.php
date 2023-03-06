@@ -45,7 +45,7 @@
 
                     <a href="{{ route('spp.export') }}">
                         <button type="button" class="btn btn-rounded btn-outline-success ml-2">
-                            <i class="fa fa-file-excel"></i> Export
+                            <i class="fa fa-file-excel-o"></i> Export
                         </button>
                     </a>
 

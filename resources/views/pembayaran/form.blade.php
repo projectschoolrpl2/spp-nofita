@@ -25,12 +25,12 @@
                             </label>
                     
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" class="form-control col-md-12 col-xs-12" id="kode-pelanggan" 
-                                placeholder="" readonly name="no_faktur">
+                                <input type="text" class="form-control col-md-12 col-xs-12" id="nisn" 
+                                placeholder="" readonly name="nisn">
                             </div>
                         </div>
             
-                        <div class="col-md-6 col-sm-6 col-xs-12 form-group" style="float: right">
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group" style="float: right; padding-left:130px;">
                             <label class="control-label col-md-6 col-sm-6 col-xs-12">
                             Tahun Bayar
                             </label>
@@ -45,21 +45,30 @@
                         </div>
             
             
-                        <div class="col-md-6 col-sm-6 col-xs-12 form-group" style="float: left; margin-top:-5px">
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group" style="float: left; ">
                             <label for="kode-pelanggan" class="control-label col-md-6 col-sm-6 col-xs-12">
                                 Nama
                             </label>
                     
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                            <button class="form-control col-md-12 col-xs-12" type="button" id="tambahBarangBtn" data-toggle="modal"
-                                data-target="#identitasModal">
-                                <i class="fa fa-search" style="float:right"></i>
-                            </button>
+                            <div class="form-group input-group col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control col-md-9 col-xs-9" id="nama" 
+                                placeholder="" readonly name="nama"
+                                >
+
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-outline 
+                                    btn-outline-primary" 
+                                    data-toggle="modal" 
+                                    data-target="#identitasModal">
+                                        <i class="fa fa-search" ></i>
+                                    </button>
+                                </span>
                             </div>
                         </div>
 
-                        <div class="col-md-6 col-sm-6 col-xs-12 form-group" style="float: right; margin-top: 5px">
-                            <label class="control-label col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group" style="float: right; 
+                        padding-left:120px;">
+                            <label class="control-label col-md-8 col-sm-6 col-xs-12">
                                 Tanggal Bayar
                             </label>
                     
@@ -69,31 +78,26 @@
                             </div>
                         </div>
             
-                        <div class="col-md-6 col-sm-6 col-xs-12 form-group" style="float: left">
-                            <label for="kode-pelanggan" class="control-label col-md-6 col-sm-6 col-xs-12">
-                                Jumlah Bayar
-                            </label>
-                    
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" class="form-control col-md-12 col-xs-12" id="nominal" 
-                                placeholder="" readonly name="nominal" 
-                                value="">
-                            </div>
-                        </div>
             
-                        <div class="col-md-6 col-sm-6 col-xs-12 form-group " style="float: right; margin-top:-20px">
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group " style="float: left; margin-top:-20px;
+                        padding-left:120px">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">
                                 &nbsp;
                             </label>
                     
-                            <div class="col-md-9 col-sm-9 col-xs-12">
-                                <button class="btn btn-success" type="button" id="tambahBarangBtn" data-toggle="modal"
-                                data-target="#identitadal">
+                            <div class="col-md-9 col-sm-9 col-xs-12" style="color: rgb(191, 172, 226)">
+                                <button class="btn" type="button"  data-toggle="modal"
+                                data-target="#dataTransaksiModal" 
+                                style="color: rgb(147, 191, 207)">
                                     <i class="fa fa-plus"></i> Tambah Transaksi
                                 </button>
                             </div>
                         </div>   
                     </form>
+
+                    <div class="x_content">
+                        @include('pembayaran.data')
+                    </div>
             
                   </div>
             </div>
@@ -102,16 +106,62 @@
 
     </div>
 @endsection
-@include('pembayaran.data')
+{{-- @include('pembayaran.data') --}}
 
 @push('js')
     <script>
-        // initialization
+        // initialization tabel siswa
         $('#example').DataTable()
 
+        // initialization tabel spp
+        $('#tbl-modal-spp').DataTable()
+
         // pemilihan siswa
-        $('#example').on('click', '.pilihSiswaBtn', function(){
-            tambahSiswa(this)
+        // $('#example').on('click', '.pilihSiswaBtn', function(){
+        //     tambahSiswa(this)
+        // })
+
+        $(document).on('click', '.pilihSiswaBtn', function(){
+            var id = $(this).data("id")
+            var nisn = $(this).data("nisn")
+            var nama = $(this).data("nama")
+            // var id_kelas = $(this).data("id_kelas")
+            // var alamat = $(this).data("alamat")
+            // var no_telp = $(this).data("no_telp")
+            // var id_spp = $(this).data("id_spp")
+            // var jk = $(this).data("jk")
+            // var username = $(this).data("username")
+            // var password = $(this).data("password")
+
+            $('#id').val(id)
+            $('#nisn').val(nisn)
+            $('#nama').val(nama)
+            // $('#id_kelas').val(id_kelas)
+            // $('#alamat').val(alamat)
+            // $('#no_telp').val(no_telp)
+            // $('#id_spp').val(id_spp)
+            // $('#jk').val(jk)
+            // $('#username').val(username)
+            // $('#password').val(password)
+            $('#identitasModal').modal('hide')
         })
+
+        // $('#dataTransaksiModal').click(function() {
+        //     var tahun = $(".tahun").val()
+        //     let tahun = d.find('td:eq(2)').text()
+        // })
+
+        // $(document).on('click', '#dataTransaksiModal', function(){
+        //     var tahun = document.getElementById("id_spp").value;
+        // })
+
+        // $(document).ready(function(){
+        //     $('#dataTransaksiModal').click(function() {
+        //         var tahun = $(".tahun").val()
+        //         let tahun = d.find('td:eq(2)').text()
+        //     })
+
+            
+        // })
     </script>
 @endpush

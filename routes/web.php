@@ -27,8 +27,10 @@ Route::get('laporan', [LaporanController::class, 'index']);
 Route::get('spp-export', [SppController::class, 'exportData'])->name('spp.export');
 Route::post('spp-import', [SppController::class, 'importData'])->name('spp.import');
 
+Route::get('officer-export', [OfficerController::class, 'exportData'])->name('officer.export');
+
 Route::get('/', [LoginController::class, 'index'])->middleware('auth');
-Route::get('home', [LoginController::class, 'index'])->middleware('auth                             ');
+Route::get('home', [LoginController::class, 'index'])->middleware('auth');
 
 Route::controller(LoginController::class)->group(function(){
     // login
@@ -67,6 +69,7 @@ Route::group(['middleware' => ['auth']], function(){
     });
 
 });
+
 
 
 

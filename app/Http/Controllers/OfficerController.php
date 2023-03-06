@@ -98,4 +98,9 @@ class OfficerController extends Controller
 
         return redirect('officer')->with('success', 'Delete data Petugas berhasil!');
     }
+
+    public function exportData(){
+        $date = date('Y-m-d');
+        return Excel::download(new officerExport, $date.'_officer.xlsx');
+    }
 }
