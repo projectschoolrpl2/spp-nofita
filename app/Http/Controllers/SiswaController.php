@@ -8,6 +8,9 @@ use App\Http\Requests\UpdatesiswaRequest;
 use App\Models\grade;
 use App\Models\spp;
 
+use App\Exports\SiswaExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class SiswaController extends Controller
 {
     /**
@@ -19,6 +22,7 @@ class SiswaController extends Controller
     {
         $data['siswa'] = siswa::select('grade.nama_kelas', 'spp.tahun', 'siswa.*')->leftJoin
         ('grade', 'grade.id', 'siswa.id_kelas')->leftJoin('spp', 'spp.id', 'siswa.id_spp')->get();
+        // $data['siswa'] = siswa::get();
         $data['grade'] = grade::get();
         $data['spp'] = spp::get();
         return view('siswa.index')->with($data);
@@ -94,5 +98,10 @@ class SiswaController extends Controller
         $siswa->delete();
 
         return redirect('siswa')->with('success', 'Delete student information correctly finished!');
+    }
+
+    public function export() 
+    {
+        return Excel::download(new SiswaExport, 'siswa.xlsx');
     }
 }

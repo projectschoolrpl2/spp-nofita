@@ -72,9 +72,9 @@
                                 Tanggal Bayar
                             </label>
                     
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-md-7 col-sm-6 col-xs-12">
                                 <input type="date" class="date-picker form-control col-md-12 col-xs-12" required="required"
-                                value="{{ date('Y-m-d') }}" name="tgl_bayar">
+                                value="{{ date('Y-m-d') }}"  name="tgl_bayar" readonly>
                             </div>
                         </div>
             
@@ -87,7 +87,7 @@
                     
                             <div class="col-md-9 col-sm-9 col-xs-12" style="color: rgb(191, 172, 226)">
                                 <button class="btn" type="button"  data-toggle="modal"
-                                data-target="#dataTransaksiModal" 
+                                data-target="#dataTransaksiModal" id="tambahTransaksi"
                                 style="color: rgb(147, 191, 207)">
                                     <i class="fa fa-plus"></i> Tambah Transaksi
                                 </button>
@@ -116,52 +116,25 @@
         // initialization tabel spp
         $('#tbl-modal-spp').DataTable()
 
-        // pemilihan siswa
-        // $('#example').on('click', '.pilihSiswaBtn', function(){
-        //     tambahSiswa(this)
+        // $('#dataTransaksiModal').click(function(){
+        //     $('#id_spp').val(id_spp)
         // })
+        $('#tambahTransaksi').on('click', function(){
+            console.log($('#id_spp').val())
+        })
 
         $(document).on('click', '.pilihSiswaBtn', function(){
             var id = $(this).data("id")
             var nisn = $(this).data("nisn")
             var nama = $(this).data("nama")
-            // var id_kelas = $(this).data("id_kelas")
-            // var alamat = $(this).data("alamat")
-            // var no_telp = $(this).data("no_telp")
-            // var id_spp = $(this).data("id_spp")
-            // var jk = $(this).data("jk")
-            // var username = $(this).data("username")
-            // var password = $(this).data("password")
 
             $('#id').val(id)
             $('#nisn').val(nisn)
             $('#nama').val(nama)
-            // $('#id_kelas').val(id_kelas)
-            // $('#alamat').val(alamat)
-            // $('#no_telp').val(no_telp)
-            // $('#id_spp').val(id_spp)
-            // $('#jk').val(jk)
-            // $('#username').val(username)
-            // $('#password').val(password)
+         
             $('#identitasModal').modal('hide')
         })
 
-        // $('#dataTransaksiModal').click(function() {
-        //     var tahun = $(".tahun").val()
-        //     let tahun = d.find('td:eq(2)').text()
-        // })
-
-        // $(document).on('click', '#dataTransaksiModal', function(){
-        //     var tahun = document.getElementById("id_spp").value;
-        // })
-
-        // $(document).ready(function(){
-        //     $('#dataTransaksiModal').click(function() {
-        //         var tahun = $(".tahun").val()
-        //         let tahun = d.find('td:eq(2)').text()
-        //     })
-
-            
-        // })
+       
     </script>
 @endpush

@@ -43,6 +43,12 @@
                         <i class="fa fa-plus"></i> Tambah Data Siswa
                     </button>
 
+                    <a href="{{ route('siswa.export') }}">
+                        <button type="button" class="btn btn-rounded btn-outline-success ml-2">
+                            <i class="fa fa-file-excel-o"></i> Export
+                        </button>
+                    </a>
+
                     <div class="mt-3">
                         @include('siswa.data')
                     </div>

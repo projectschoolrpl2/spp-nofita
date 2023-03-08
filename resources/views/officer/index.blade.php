@@ -49,6 +49,12 @@
                         </button>
                     </a>
 
+                    <button type="button" class="btn btn-rounded btn-outline-warning ml-2"
+                    data-toggle="modal" 
+                    data-target="#ImportOfficer">
+                        <i class="fa fa-file-excel-o"></i> Import
+                    </button>
+
                     <div class="mt-3">
                         @include('officer.data')
                     </div>

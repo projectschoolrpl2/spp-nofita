@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>Login Pembayaran SPP</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset ('projek') }}/images/favicon.png">
     <link href="{{asset ('projek') }}/css/style.css" rel="stylesheet">
@@ -24,33 +24,41 @@
                                 <div class="auth-form">
                                     <h3 class="text-center mb-4"><b>Login - SPP</b></h3>
                                     <h4 class="text-center mb-4">Sign in your account</h4>
-                                    <form action="login" method="post" novalidate>
+                                    <form action="{{ route('proses') }}" method="post" novalidate>
                                         @csrf
                                         <div class="form-group">
                                             <label><strong>Username</strong></label>
-                                            <input type="text" class="form-control"
+                                            <input autofocus type="text" class="form-control
                                                 @error('username')
                                                     is-invalid
                                                 @enderror
+                                            "
                                              placeholder="username"
                                             name="username">
+
+                                            @error('username')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
 
                                         <div class="form-group">
                                             <label><strong>Password</strong></label>
-                                            <input type="password" class="form-control" 
+                                            <input type="password" class="form-control
                                                 @error('password')
                                                     is-invalid
                                                 @enderror
+                                            " 
                                             placeholder="password"
                                             name="password">
-                                        </div>
 
-                                        @error('username')
-                                            <div class="error" style="color: red; font-size: 0.8em">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
+                                            @error('password')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
 
                                         <div class="form-row d-flex justify-content-between mt-4 mb-2">
                                             <div class="form-group">

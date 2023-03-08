@@ -18,11 +18,8 @@
                                 <th>Nama</th>
                                 <th>Kelas</th>
                                 <th>Alamat</th>
-                                <th>No. Telepon</th>
-                                <th>Tahun</th>
-                                <th>Jenis Kelamin</th>
-                                <th>Username</th>
-                                <th>Password</th>
+                                <th>No. Telepon</th>       
+                                <th>Jenis Kelamin</th>                               
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -37,24 +34,13 @@
                                     <td>{{ $s->id_kelas }}</td>
                                     <td>{{ $s->alamat }}</td>
                                     <td>{{ $s->no_telp }}</td>
-                                    <td>{{ $s->id_spp }}</td>
                                     <td>{{ $s->jk }}</td>
-                                    <td>{{ $s->username }}</td>
-                                    <td>{{ $s->password }}</td>
                                     <td>
                                         <button type="button" class="btn 
                                         btn-rounded btn-outline-primary pilihSiswaBtn" 
                                         data-id="{{ $s->id }}"
                                         data-nisn="{{ $s->nisn }}"
-                                        data-nama="{{ $s->nama }}"
-                                        {{-- data-id_kelas="{{ $s->id_kelas }}"
-                                        data-alamat="{{ $s->alamat }}"
-                                        data-no_telp="{{ $s->no_telp }}"
-                                        data-id_spp="{{ $s->id_spp }}"
-                                        data-jk="{{ $s->jk }}"
-                                        data-username="{{ $s->username }}"
-                                        data-password="{{ $s->password }}" --}}
-                                        >
+                                        data-nama="{{ $s->nama }}">
                                             Pilih
                                         </button>
                                     </td>
@@ -139,12 +125,12 @@
                     </thead>
             
                     <tbody>
-                        {{-- @foreach ($spp as $sp) --}}
+                        @foreach ($spp as $sp)
                             <tr>
                                 <td>{{ $i = !isset($i)?1:++$i }}</td>
                                 <td>{{ $sp->tahun }}</td>
                                 <td>
-                                    {{ $sp->nominal }}
+                                    {{ $sp->id_spp }}
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-rounded btn-outline-warning 
@@ -153,7 +139,7 @@
                                     </button>
                                 </td>
                             </tr>
-                        {{-- @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
                     

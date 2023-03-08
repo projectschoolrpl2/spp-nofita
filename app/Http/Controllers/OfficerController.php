@@ -7,6 +7,7 @@ use App\Http\Requests\StoreofficerRequest;
 use App\Http\Requests\UpdateofficerRequest;
 
 use App\Exports\officerExport;
+use App\Imports\OfficerImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class OfficerController extends Controller
@@ -102,5 +103,10 @@ class OfficerController extends Controller
     public function exportData(){
         $date = date('Y-m-d');
         return Excel::download(new officerExport, $date.'_officer.xlsx');
+    }
+
+    public function importData(){
+        Excel::import(new OfficerImport, request()->file('import'));
+        return redirect('officer')->with('success', 'Import data Petugas berhasil!');
     }
 }

@@ -8,32 +8,48 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     public function index(){
-        return view('login.index');
-    }
-
-    public function authenticate(Request $request)
-    {
-        $credentials = $request->validate([
-            'username' => ['required'],
-            'password' => ['required'],
-        ]);
-
-        if(Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            if(Auth::user()->role == 'admin'){
-                return redirect()->route('a.home');
-            }else if(Auth::user()->role == 'petugas'){
-                return redirect()->route('p.home');
-            }else if(Auth::user()->role == 'siswa'){
-                return redirect()->route('s.home');
-            }
-
+        if(Auth::user()){
+            // if($user->level == '1'){
+            //     return redirect()->intended('/');
+            // } elseif($user->level == '2'){
+            //     return redirect()->intended('pembayaran');
+            // } elseif($user->level == '3'){
+            //     return redirect()->intended('history');
+            // }
             return redirect()->intended('home');
         }
 
+        return view('login.view');
+    }
+
+    public function proses(Request $request){
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+
+        $credential = $request->only('username', 'password');
+
+        if(Auth::attempt($credential)){
+            $request->session()->regenerate();
+            $user = Auth::user();
+            // if($user->level == '1'){
+            //     return redirect()->intended('/');
+            // } elseif($user->level == '2'){
+            //     return redirect()->intended('pembayaran');
+            // } elseif($user->level == '3'){
+            //     return redirect()->intended('history');
+            // }
+
+            if($user){
+                return redirect()->intended('home');
+            }
+
+            return redirect()->intended('/');
+        }
+
         return back()->withErrors([
-            'username' => 'Username or Password is wrong',
+            'username' => 'username or password is wrong!'
         ])->onlyInput('username');
     }
 
@@ -41,7 +57,6 @@ class LoginController extends Controller
         Auth::logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         return redirect('/login');

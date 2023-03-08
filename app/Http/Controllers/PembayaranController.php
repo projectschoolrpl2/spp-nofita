@@ -17,12 +17,13 @@ class PembayaranController extends Controller
      */
     public function index()
     {
+        // echo 'Ini halaman pembayaran';
         return view('pembayaran.index');
     }
 
     public function form(){
         $data['siswa'] = siswa::all();
-        $data['spp'] = spp::all();
+        $data['spp'] = spp::orderByDesc('tahun')->get();
         return view('pembayaran.form', $data);
     }
 

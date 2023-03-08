@@ -24,6 +24,15 @@
                         </div>
                     @endif
 
+                    @if (session('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -52,7 +61,7 @@
                     <button type="button" class="btn btn-rounded btn-outline-warning ml-2"
                     data-toggle="modal" 
                     data-target="#formImport">
-                        <i class="fa fa-file-excel"></i> Import
+                        <i class="fa fa-file-excel-o"></i> Import
                     </button>
 
                     <div class="mt-3">
