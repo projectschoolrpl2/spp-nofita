@@ -6,6 +6,9 @@ use App\Models\grade;
 use App\Http\Requests\StoregradeRequest;
 use App\Http\Requests\UpdategradeRequest;
 
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
+
 class GradeController extends Controller
 {
     /**
@@ -37,9 +40,16 @@ class GradeController extends Controller
      */
     public function store(StoregradeRequest $request)
     {
-        grade::create($request->all());
-
-        return redirect('grade')->with('success', 'Input data kelas berhasil dilakukan!');
+        // DB::beginTransaction();
+        // try{
+            grade::create($request->all());
+            return redirect('grade')->with('success', 'Input data kelas berhasil dilakukan!');
+        // }catch(QueryException $e){
+            // DB::rollBack();
+            // return redirect('grade')->with('error', 'Terjadi kesalahan '.$e->getMessage());
+        // }
+        // DB::commit();
+        
     }
 
     /**

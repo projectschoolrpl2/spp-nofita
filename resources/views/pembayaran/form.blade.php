@@ -85,7 +85,8 @@
                                 &nbsp;
                             </label>
                     
-                            <div class="col-md-9 col-sm-9 col-xs-12" style="color: rgb(191, 172, 226)">
+                            <div class="col-md-9 col-sm-9 col-xs-12" 
+                            style="color: rgb(191, 172, 226)">
                                 <button class="btn" type="button"  data-toggle="modal"
                                 data-target="#dataTransaksiModal" id="tambahTransaksi"
                                 style="color: rgb(147, 191, 207)">
@@ -110,6 +111,9 @@
 
 @push('js')
     <script>
+        var count=0;
+        $('#tambahTransaksi').prop('disabled', true);
+
         // initialization tabel siswa
         $('#example').DataTable()
 
@@ -121,6 +125,10 @@
         // })
         $('#tambahTransaksi').on('click', function(){
             console.log($('#id_spp').val())
+        })
+
+        $(document).on('change', '#id_spp', function(){
+            $('#tambahTransaksi').prop('disabled', false);
         })
 
         $(document).on('click', '.pilihSiswaBtn', function(){
@@ -135,6 +143,36 @@
             $('#identitasModal').modal('hide')
         })
 
+        $(document).on('click', '.hapusBulan', function(){
+            var id=$(this).data("id");
+            $("#row"+id).remove();
+        })
+
+        $(document).on('click', '.pilihSppBtn', function(){
+            count++;
+            var id = $(this).data("id");
+            var nama = $(this).data("nama");
+            var idSpp=$("#id_spp").val();
+            var html='';
+            html+="<tr id='row"+count+"'>";
+            html+="<td>";
+            html+=idSpp;
+            html+="</td>";
+            html+="<td>";
+            html+=nama;
+            html+="</td>";
+            html+="<td>";
+            html+=300000;
+            html+="</td>";
+            html+="<td>";
+            html+="<button type='button' class='btn btn-danger hapusBulan' data-id='"+count+"'>";
+            html+="<i class='fa fa-trash'></i></button>";
+            html+="</td>";
+            html+="</tr>"
+
+            $("#buff").remove();
+            $("#tblTransaksi").append(html);
+        })
        
     </script>
 @endpush

@@ -26,27 +26,28 @@ Route::post('login/proses', [LoginController::class, 'proses'])->name('proses');
 Route::post('logout', [LoginController::class, 'logout']);
 
 Route::group(['middleware' => ['auth']], function(){
+    Route::resource('pembayaran', PembayaranController::class);
+    Route::get('/form', [PembayaranController::class, 'form']);
+    Route::get('history', [HistoryController::class, 'index']);
     Route::group(['middleware' => ['cekUserLogin:1']], function(){
         Route::resource('officer', OfficerController::class);
         Route::resource('siswa', SiswaController::class);
         Route::resource('grade', GradeController::class);
         Route::resource('spp', SppController::class);
-        Route::resource('pembayaran', PembayaranController::class);
-        Route::get('/form', [PembayaranController::class, 'form']);
-
-        Route::get('history', [HistoryController::class, 'index']);
+        // Route::resource('pembayaran', PembayaranController::class);
+        // Route::get('/form', [PembayaranController::class, 'form']);
+        // Route::get('history', [HistoryController::class, 'index']);
         Route::get('laporan', [LaporanController::class, 'index']);
     });
 
     Route::group(['middleware' => ['cekUserLogin:2']], function(){
-        Route::resource('pembayaran', PembayaranController::class);
-        Route::get('/form', [PembayaranController::class, 'form']);
-
-        Route::get('history', [HistoryController::class, 'index']);
+        // Route::resource('pembayaran', PembayaranController::class);
+        // Route::get('/form', [PembayaranController::class, 'form']);
+        // Route::get('history', [HistoryController::class, 'index']);
     });
 
     Route::group(['middleware' => ['cekUserLogin:3']], function(){
-        Route::get('history', [HistoryController::class, 'index']);
+        // Route::get('history', [HistoryController::class, 'index']);
     });
 });
 

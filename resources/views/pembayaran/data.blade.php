@@ -66,12 +66,13 @@
                 <th>Tahun</th>
                 <th>Bulan</th>
                 <th>Nominal</th>
+                <th>Aksi</th>
             </tr>
         </thead>
 
-        <tbody>
+        <tbody id="tblTransaksi">
             <tr>
-                <td colspan="6" style="text-align:center; font-style:italic">Belum ada Data</td>
+                <td id="buff" colspan="6" style="text-align:center; font-style:italic">Belum ada Data</td>
             </tr>
         </tbody>
     </table>
@@ -85,7 +86,7 @@
             <label class="control-label col-md-2 col-sm-2 offset-md-7">Total Harga</label>
 
             <div class="col-md-3 mr-md-auto" style="float: right; ">
-                <input type="text" class="form-control col-md-12 col-xs-12" required="required" >
+                <input type="text" class="form-control col-md-12 col-xs-12" readonly required="required" >
             </div>
         </div>
     </div>
@@ -119,13 +120,12 @@
                         <tr>
                             <th>No.</th>
                             <th>Bulan</th>
-                            <th>Nominal</th>
                             <th>Action</th>
                         </tr>
                     </thead>
             
                     <tbody>
-                        @foreach ($spp as $sp)
+                        {{-- @foreach ($spp as $sp)
                             <tr>
                                 <td>{{ $i = !isset($i)?1:++$i }}</td>
                                 <td>{{ $sp->tahun }}</td>
@@ -139,7 +139,29 @@
                                     </button>
                                 </td>
                             </tr>
-                        @endforeach
+                        @endforeach --}}
+                        <?php 
+                        function getBulan($b){
+                            $monthNum  = $b;
+                            $dateObj   = DateTime::createFromFormat('!m', $monthNum);
+                            $monthName = $dateObj->format('F');
+                            return $monthName;
+                        }
+                        ?>
+                        
+                        @for ($i =1; $i <= 12; $i++)
+                        <tr>
+                            <td>{{ $i }}</td>
+                            <td>{{ getBulan($i) }}</td>
+                            <td>
+                                <button type="button" class="btn btn-rounded btn-outline-warning 
+                                pilihSppBtn" data-dismiss="modal" data-id="{{ $i }}" 
+                                data-nama="{{ getBulan($i) }}">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        @endfor
                     </tbody>
                 </table>
                     

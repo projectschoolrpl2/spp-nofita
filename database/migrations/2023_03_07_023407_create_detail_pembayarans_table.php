@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->integer('id_pembayaran')->unsigned();
             $table->string('bulan_bayar');
-            $table->string('tahun_bayar');
+            $table->integer('id_spp')->unsigned();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
