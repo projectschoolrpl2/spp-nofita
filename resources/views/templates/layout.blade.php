@@ -129,6 +129,11 @@
                         <li><a class="has-arrow" href="{{ url('spp') }}" aria-expanded="false">
                             <i class="fa fa-money" aria-hidden="true"></i><span class="nav-text">SPP</span></a>
                         </li>
+
+                        <li><a class="has-arrow" href="{{ url('data_karyawan') }}" aria-expanded="false">
+                            <i class="fa fa-address-book" aria-hidden="true">
+                                </i><span class="nav-text">Simulasi Data Karyawan</span></a>
+                        </li>
                         
                         <li class="nav-label">Transactions</li>
                         <li><a class="has-arrow" href="{{ url('pembayaran') }}" aria-expanded="false">

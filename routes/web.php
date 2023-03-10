@@ -10,6 +10,7 @@ use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SimulasiController;
 
 // Route::get('login', [LoginController::class, 'index'])->name('login');
 
@@ -38,6 +39,7 @@ Route::group(['middleware' => ['auth']], function(){
         // Route::get('/form', [PembayaranController::class, 'form']);
         // Route::get('history', [HistoryController::class, 'index']);
         Route::get('laporan', [LaporanController::class, 'index']);
+        Route::get('data_karyawan', [SimulasiController::class, 'index']);
     });
 
     Route::group(['middleware' => ['cekUserLogin:2']], function(){
