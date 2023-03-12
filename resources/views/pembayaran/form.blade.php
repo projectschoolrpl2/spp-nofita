@@ -112,7 +112,7 @@
 @push('js')
     <script>
         var count=0;
-        $('#tambahTransaksi').prop('disabled', true);
+        // $('#tambahTransaksi').prop('disabled', true);
 
         // initialization tabel siswa
         $('#example').DataTable()
@@ -124,7 +124,9 @@
         //     $('#id_spp').val(id_spp)
         // })
         $('#tambahTransaksi').on('click', function(){
-            console.log($('#id_spp').val())
+            // console.log($('#id_spp').val())
+            // var id_spp = $(this).val()
+            // $('')
         })
 
         $(document).on('change', '#id_spp', function(){
@@ -172,6 +174,10 @@
 
             $("#buff").remove();
             $("#tblTransaksi").append(html);
+        })
+
+        $(document).on('click', '.pilihSppBtn', function(){
+            console.log('test')
         })
        
     </script>

@@ -24,10 +24,18 @@
                     <td>{{ $s->nisn }}</td>
                     <td>{{ $s->nis }}</td>
                     <td>{{ $s->nama }}</td>
-                    <td>{{ $s->id_kelas }}</td>
+                    <td
+                    @foreach ($grade as $g)
+                        value = "{{ $s->id_kelas }}"
+                    @endforeach                    
+                    >{{ $g->nama_kelas }}</td>
                     <td>{{ $s->alamat }}</td>
                     <td>{{ $s->no_telp }}</td>
-                    <td>{{ $s->id_spp }}</td>
+                    <td
+                    @foreach ($spp as $g)
+                        value = "{{ $s->id_spp }}"
+                    @endforeach  
+                    >{{ $g->tahun }}</td>
                     <td>{{ $s->jk }}</td>
                     <td>{{ $s->username }}</td>
                     <td>{{ $s->password }}</td>

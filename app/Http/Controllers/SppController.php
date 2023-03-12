@@ -32,19 +32,15 @@ class SppController extends Controller
    
     public function store(StoresppRequest $request)
     {
-        spp::create($request->all());
+        DB::beginTransaction();
+        try{
+            spp::create($request->all());
             return redirect('spp')->with('success', 'Input data SPP berhasil!');
-
-        // DB::beginTransaction();
-        // try {
-        //     spp::create($request->all());
-        //     return redirect('spp')->with('success', 'Input data SPP berhasil!');
-        // }catch(QueryException $e){
-        //     DB::rollBack();
-        //     return redirect('spp')->with('error', 'Terjadi Kesalahan '.$e->getMessage());
-        // }
-        
-        // DB::commit();
+         }catch(QueryException $e){
+            DB::rollBack();
+            return redirect('spp')->with('error', 'Terjadi Kesalahan query');
+        }
+        DB::commit();
     }
 
    

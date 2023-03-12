@@ -7,6 +7,8 @@ use App\Http\Requests\StoresiswaRequest;
 use App\Http\Requests\UpdatesiswaRequest;
 use App\Models\grade;
 use App\Models\spp;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
 use App\Exports\SiswaExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -46,9 +48,15 @@ class SiswaController extends Controller
      */
     public function store(StoresiswaRequest $request)
     {
-        siswa::create($request->all());
-
-        return redirect('siswa')->with('success', 'Input data siswa berhasil!');
+        DB::beginTransaction();
+        try{
+            siswa::create($request->all());
+            return redirect('siswa')->with('success', 'Input data siswa berhasil!');
+        }catch(QueryException $e){
+            DB::rollBack();
+            return redirect('spp')->with('error', 'Terjadi Kesalahan query');
+        }
+        DB::commit();
     }
 
     /**

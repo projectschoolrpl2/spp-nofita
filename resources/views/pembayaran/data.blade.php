@@ -17,8 +17,6 @@
                                 <th>NIS</th>
                                 <th>Nama</th>
                                 <th>Kelas</th>
-                                <th>Alamat</th>
-                                <th>No. Telepon</th>       
                                 <th>Jenis Kelamin</th>                               
                                 <th>Action</th>
                             </tr>
@@ -31,9 +29,12 @@
                                     <td>{{ $s->nisn }}</td>
                                     <td>{{ $s->nis }}</td>
                                     <td>{{ $s->nama }}</td>
-                                    <td>{{ $s->id_kelas }}</td>
-                                    <td>{{ $s->alamat }}</td>
-                                    <td>{{ $s->no_telp }}</td>
+                                                                 
+                                    <td 
+                                        @foreach ($grade as $g)   
+                                        value="{{ $s->id_kelas }}"
+                                        @endforeach
+                                    >{{ $g->nama_kelas }}</td>
                                     <td>{{ $s->jk }}</td>
                                     <td>
                                         <button type="button" class="btn 
@@ -120,17 +121,23 @@
                         <tr>
                             <th>No.</th>
                             <th>Bulan</th>
+                            <th>Nominal</th>
                             <th>Action</th>
                         </tr>
                     </thead>
             
                     <tbody>
-                        {{-- @foreach ($spp as $sp)
-                            <tr>
-                                <td>{{ $i = !isset($i)?1:++$i }}</td>
-                                <td>{{ $sp->tahun }}</td>
-                                <td>
-                                    {{ $sp->id_spp }}
+                        {{-- <tr>{{ $i = !isset($i)?1:++$i }}</tr> --}}
+                        {{-- @foreach ($spp as $sp) --}}
+                            {{-- <tr>
+                                <td>1</td>
+                                <td></td>
+                                <td
+                                    @foreach ($spp as $s)
+                                        value = "{{ $s->id_spp }}"
+                                    @endforeach
+                                >
+                                    
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-rounded btn-outline-warning 
@@ -138,15 +145,16 @@
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </td>
-                            </tr>
-                        @endforeach --}}
+                            </tr> --}}
+                        {{-- @endforeach --}}
                         <?php 
-                        function getBulan($b){
-                            $monthNum  = $b;
-                            $dateObj   = DateTime::createFromFormat('!m', $monthNum);
-                            $monthName = $dateObj->format('F');
-                            return $monthName;
-                        }
+                        
+                            function getBulan($b){
+                                $monthNum  = $b;
+                                $dateObj   = DateTime::createFromFormat('!m', $monthNum);
+                                $monthName = $dateObj->format('F');
+                                return $monthName;
+                            }
                         ?>
                         
                         @for ($i =1; $i <= 12; $i++)

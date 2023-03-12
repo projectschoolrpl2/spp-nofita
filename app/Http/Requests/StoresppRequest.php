@@ -24,16 +24,16 @@ class StoresppRequest extends FormRequest
     public function rules()
     {
         return [
-            'tahun' => 'required',
-            'nominal' => 'required'
+            // 'tahun' => 'required',
+            // 'nominal' => 'required'
         ];
     }
 
     public function messages()
     {
         return [
-            'tahun.required' => 'Data tahun belum diisi!',
-            'nominal.required' => 'Data nominal belum diisi!'
+            // 'tahun.required' => 'Data tahun belum diisi!',
+            // 'nominal.required' => 'Data nominal belum diisi!'
         ];
     }
 }

@@ -40,15 +40,15 @@ class GradeController extends Controller
      */
     public function store(StoregradeRequest $request)
     {
-        // DB::beginTransaction();
-        // try{
+        DB::beginTransaction();
+        try{
             grade::create($request->all());
             return redirect('grade')->with('success', 'Input data kelas berhasil dilakukan!');
-        // }catch(QueryException $e){
-            // DB::rollBack();
-            // return redirect('grade')->with('error', 'Terjadi kesalahan '.$e->getMessage());
-        // }
-        // DB::commit();
+        }catch(QueryException $e){
+            DB::rollBack();
+            return redirect('grade')->with('error', 'Terjadi kesalahan query');
+        }
+        DB::commit();
         
     }
 

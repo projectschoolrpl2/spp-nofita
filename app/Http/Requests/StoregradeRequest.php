@@ -24,16 +24,16 @@ class StoregradeRequest extends FormRequest
     public function rules()
     {
         return [
-            'nama_kelas' => 'required',
-            'kompetensi_keahlian' => 'required'
+            // 'nama_kelas' => 'required',
+            // 'kompetensi_keahlian' => 'required'
         ];
     }
 
     public function messages()
     {
         return [
-            'nama_kelas.required' => 'Data nama kelas belum diisi!',
-            'kompetensi_keahlian.required' => 'Data kompetensi keahlian belum diisi!'
+            // 'nama_kelas.required' => 'Data nama kelas belum diisi!',
+            // 'kompetensi_keahlian.required' => 'Data kompetensi keahlian belum diisi!'
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\pembayaran;
 use App\Http\Requests\StorepembayaranRequest;
 use App\Http\Requests\UpdatepembayaranRequest;
+use App\Models\grade;
 use App\Models\siswa;
 use App\Models\spp;
 
@@ -22,7 +23,9 @@ class PembayaranController extends Controller
     }
 
     public function form(){
-        $data['siswa'] = siswa::all();
+        $data['siswa'] = siswa::select('grade.nama_kelas', 'spp.tahun', 'siswa.*')->leftJoin
+        ('grade', 'grade.id', 'siswa.id_kelas')->leftJoin('spp', 'spp.id', 'siswa.id_spp')->get();
+        $data['grade'] = grade::get();
         $data['spp'] = spp::orderByDesc('tahun')->get();
         return view('pembayaran.form', $data);
     }

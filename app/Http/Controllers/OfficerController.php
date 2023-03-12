@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\officer;
 use App\Http\Requests\StoreofficerRequest;
 use App\Http\Requests\UpdateofficerRequest;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
 use App\Exports\officerExport;
 use App\Imports\OfficerImport;
@@ -46,9 +48,15 @@ class OfficerController extends Controller
      */
     public function store(StoreofficerRequest $request)
     {
-        officer::create($request->all());
-
-        return redirect('officer')->with('success', 'Input data petugas berhasil!');
+        DB::beginTransaction();
+        try{
+            officer::create($request->all());
+            return redirect('officer')->with('success', 'Input data petugas berhasil!');
+        }catch(QueryException $e){
+            DB::rollBack();
+            return redirect('spp')->with('error', 'Terjadi Kesalahan query');
+        }
+        DB::commit();
     }
 
     /**
