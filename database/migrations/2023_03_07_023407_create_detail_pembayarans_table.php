@@ -17,6 +17,7 @@ return new class extends Migration
         Schema::create('detail_pembayaran', function (Blueprint $table) {
             $table->id();
             $table->integer('id_pembayaran')->unsigned();
+            $table->string('tahun_bayar');
             $table->string('bulan_bayar');
             $table->integer('id_spp')->unsigned();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

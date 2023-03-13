@@ -48,7 +48,13 @@ class PembayaranController extends Controller
      */
     public function store(StorepembayaranRequest $request)
     {
-        //
+        // $data['nisn']=$request['nisn'];
+        // $data['id_petugas']=auth()->user()->id;
+        // $data['tgl_bayar']=date('Y-m-d');
+
+        // $input_pembayaran = pembayaran::create($data);
+        // return redirect('pembayaran')->with('success', 'Input berhasil!');
+        echo "masuk";
     }
 
     /**
@@ -95,4 +101,5 @@ class PembayaranController extends Controller
     {
         //
     }
+
 }

@@ -87,7 +87,8 @@
             <label class="control-label col-md-2 col-sm-2 offset-md-7">Total Harga</label>
 
             <div class="col-md-3 mr-md-auto" style="float: right; ">
-                <input type="text" class="form-control col-md-12 col-xs-12" readonly required="required" >
+                <input type="hidden" id="total_bayar">
+                <label class="control-label col-md-6" style="font-size:20px "><div id="total_bayar_label"></div>
             </div>
         </div>
     </div>
@@ -97,7 +98,7 @@
     <div class="col-md-12" >
         <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-6" style="text-align: right">
             <div class="col-md-3 mr-md-auto" style="float: right; ">
-                <button type="button" class="btn btn-rounded btn-outline-primary">
+                <button type="submit" id="btnSimpan" class="btn btn-rounded btn-outline-primary">
                     Simpan Transaksi
                 </button>
             </div>
@@ -121,7 +122,7 @@
                         <tr>
                             <th>No.</th>
                             <th>Bulan</th>
-                            <th>Nominal</th>
+                            {{-- <th>Nominal</th> --}}
                             <th>Action</th>
                         </tr>
                     </thead>

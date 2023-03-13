@@ -13,7 +13,7 @@ class StorepembayaranRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class StorepembayaranRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nisn' => 'required',
+            'id_petugas' => 'required',
+            'tgl_bayar'=> 'required',
         ];
     }
 }

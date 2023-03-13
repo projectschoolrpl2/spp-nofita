@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('pembayaran', function (Blueprint $table) {
             $table->id();
             $table->integer('id_petugas')->unsigned();
-            $table->string('nisn', 10);
+            $table->integer('id_siswa')->unsigned();
             $table->date('tgl_bayar');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));

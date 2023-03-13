@@ -18,7 +18,8 @@
             <div class="row page-titles mx-0">
                 <div class="card-body">
 
-                    <form class="" id="">
+                    <form action="pembayaran" method="post">
+                        @csrf
                         <div class="col-md-6 col-sm-6 col-xs-12 form-group" style="float: left">
                             <label for="kode-pelanggan" class="control-label col-md-6 col-sm-6 col-xs-12">
                                 NISN
@@ -35,14 +36,18 @@
                             Tahun Bayar
                             </label>
                     
-                            <select id="id_spp" class="form-select col-sm-8 col-xs-12 col-md-6" 
-                            name="id_spp" style="height: 38px; margin-left:10px" >
+                            <select id="tahun_bayar" class="form-select col-sm-8 col-xs-12 col-md-6" 
+                            name="tahun_bayar" style="height: 38px; margin-left:10px" >
                             <option selected disabled>Pilih Tahun</option>
                                 @foreach ($spp as $sp)
-                                    <option value="{{ $sp->id }}">{{ $sp->tahun }}</option>
+                                    <option value="{{$sp->id}} {{$sp->tahun}} {{ $sp->nominal }}">{{$sp->tahun}}</option>
                                 @endforeach
                             </select>
+                            <input type="hidden" id="id_spp">
+                            <input type="hidden" id="tahun">
+                            <input type="hidden" id="nominal">
                         </div>
+
             
             
                         <div class="col-md-6 col-sm-6 col-xs-12 form-group" style="float: left; ">
@@ -112,8 +117,8 @@
 @push('js')
     <script>
         var count=0;
-        // $('#tambahTransaksi').prop('disabled', true);
-
+        $('#tambahTransaksi').prop('disabled', true);
+        $('#btnSimpan').prop('disabled', true);
         // initialization tabel siswa
         $('#example').DataTable()
 
@@ -123,14 +128,19 @@
         // $('#dataTransaksiModal').click(function(){
         //     $('#id_spp').val(id_spp)
         // })
-        $('#tambahTransaksi').on('click', function(){
+        // $('#tambahTransaksi').on('click', function(){
             // console.log($('#id_spp').val())
             // var id_spp = $(this).val()
             // $('')
-        })
+        // })
 
-        $(document).on('change', '#id_spp', function(){
+        $(document).on('change', '#tahun_bayar', function(){
             $('#tambahTransaksi').prop('disabled', false);
+            var spp=$("#tahun_bayar").val();
+            const dataSpp = spp.split(" "); 
+            $("#id_spp").val(dataSpp[0]);
+            $("#tahun").val(dataSpp[1]);
+            $("#nominal").val(dataSpp[2]);
         })
 
         $(document).on('click', '.pilihSiswaBtn', function(){
@@ -143,28 +153,43 @@
             $('#nama').val(nama)
          
             $('#identitasModal').modal('hide')
+            // console.log()
         })
 
         $(document).on('click', '.hapusBulan', function(){
             var id=$(this).data("id");
             $("#row"+id).remove();
+            getTotalBayar();
+            var total= $("#total_bayar").val();
+            // alert(total);
+            if(total == 0){
+                $('#btnSimpan').prop('disabled', true);
+            }
         })
 
+        // $(document).on('click', '#btnSimpan', function(){
+        //     alert('respon');
+        // })
         $(document).on('click', '.pilihSppBtn', function(){
             count++;
             var id = $(this).data("id");
             var nama = $(this).data("nama");
             var idSpp=$("#id_spp").val();
+            var tahun=$("#tahun").val();
+            var nominal=$("#nominal").val();
             var html='';
             html+="<tr id='row"+count+"'>";
             html+="<td>";
-            html+=idSpp;
+            html+=tahun;
+            html+="<input type='hidden' value='"+idSpp+"' name='item["+count+"][id_spp]'>";
             html+="</td>";
             html+="<td>";
             html+=nama;
+            html+="<input type='hidden' value='"+nama+"' name='item["+count+"][bulan_bayar]'>";
             html+="</td>";
             html+="<td>";
-            html+=300000;
+            html+=nominal;
+            html+="<input type='hidden' value='"+nominal+"' name='item["+count+"][nominal]' class='nominal'>";
             html+="</td>";
             html+="<td>";
             html+="<button type='button' class='btn btn-danger hapusBulan' data-id='"+count+"'>";
@@ -174,11 +199,23 @@
 
             $("#buff").remove();
             $("#tblTransaksi").append(html);
+            $('#btnSimpan').prop('disabled', false);
+
+            getTotalBayar();
         })
 
-        $(document).on('click', '.pilihSppBtn', function(){
-            console.log('test')
-        })
+        // $(document).on('click', '.pilihSppBtn', function(){
+        //     console.log('test')
+        // })
        
+        function getTotalBayar(){
+            var total=0;
+            var nominal=document.querySelectorAll('.nominal');
+            nominal.forEach(function(item){
+                total+=parseFloat(item.value);
+            });
+            $("#total_bayar").val(total);
+            $("#total_bayar_label").html(total);
+        }
     </script>
 @endpush
