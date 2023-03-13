@@ -61,3 +61,6 @@ Route::get('officer-export', [OfficerController::class, 'exportData'])->name('of
 Route::post('officer-import', [OfficerController::class, 'importData'])->name('officer.import');
 
 Route::get('siswa-export', [SiswaController::class, 'export'])->name('siswa.export');
+
+Route::get('grade-export', [GradeController::class, 'exportData'])->name('grade.export');
+Route::post('grade-import', [GradeController::class, 'importData'])->name('grade.import');

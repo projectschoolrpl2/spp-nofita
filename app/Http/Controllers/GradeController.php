@@ -9,6 +9,10 @@ use App\Http\Requests\UpdategradeRequest;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\GradeExport;
+use App\Imports\GradeImport;
+
 class GradeController extends Controller
 {
     /**
@@ -99,5 +103,16 @@ class GradeController extends Controller
         $grade->delete();
 
         return redirect('grade')->with('success', 'Delete data Kelas berhasil!');
+    }
+
+    public function exportData(){
+        $date = date('Y-m-d');
+        return Excel::download(new GradeExport, $date.'_grade.xlsx');
+    }
+
+    public function importData(){
+        Excel::import(new GradeImport, request()->file('import'));
+
+        return redirect('grade')->with('success', 'Import data Kelas berhasil!');
     }
 }
