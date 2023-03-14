@@ -139,6 +139,10 @@
                         <li><a class="has-arrow" href="{{ url('pembayaran') }}" aria-expanded="false">
                             <i class="fa fa-credit-card" aria-hidden="true"></i><span class="nav-text">Payments</span></a>
                         </li>
+
+                        {{-- <li><a class="has-arrow" href="{{ url('transaksi') }}" aria-expanded="false">
+                            <i class="fa fa-credit-card" aria-hidden="true"></i><span class="nav-text">Payments</span></a>
+                        </li> --}}
                 
                         <li class="nav-label">Histories</li>
                         <li><a class="has-arrow" href="{{ url('history') }}" aria-expanded="false">

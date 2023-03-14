@@ -11,8 +11,8 @@
                 <th>No. Telepon</th>
                 <th>Tahun</th>
                 <th>Jenis Kelamin</th>
-                <th>Username</th>
-                <th>Password</th>
+                {{-- <th>Username</th>
+                <th>Password</th> --}}
                 <th>Action</th>
             </tr>
         </thead>
@@ -37,8 +37,8 @@
                     @endforeach  
                     >{{ $g->tahun }}</td>
                     <td>{{ $s->jk }}</td>
-                    <td>{{ $s->username }}</td>
-                    <td>{{ $s->password }}</td>
+                    {{-- <td>{{ $s->username }}</td>
+                    <td>{{ $s->password }}</td> --}}
                     <td>
                         <button type="button" class="btn btn-rounded btn-outline-warning" 
                         data-toggle="modal" 

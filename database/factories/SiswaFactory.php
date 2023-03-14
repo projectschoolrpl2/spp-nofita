@@ -17,7 +17,7 @@ class SiswaFactory extends Factory
     public function definition()
     {
         return [
-            //
+            
         ];
     }
 }

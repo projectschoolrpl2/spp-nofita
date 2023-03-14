@@ -28,7 +28,7 @@ Route::post('logout', [LoginController::class, 'logout']);
 
 Route::group(['middleware' => ['auth']], function(){
     Route::resource('pembayaran', PembayaranController::class);
-    Route::get('/form', [PembayaranController::class, 'form']);
+    // Route::resource('form', PembayaranController::class);
     Route::get('history', [HistoryController::class, 'index']);
     Route::group(['middleware' => ['cekUserLogin:1']], function(){
         Route::resource('officer', OfficerController::class);

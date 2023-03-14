@@ -17,27 +17,6 @@
 
             <div class="row page-titles mx-0">
                 <div class="card-body">
-                    @if (session('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('success') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
-
-                    @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                            </ul>
-                        </div>
-                    @endif
 
                     <form action="pembayaran" method="POST">
                         @csrf
@@ -49,7 +28,7 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input type="text" class="form-control col-md-12 col-xs-12" id="nisn" 
                                 placeholder="" readonly name="nisn">
-                                <input type="hidden" id="id_siswa" name="id_siswa">
+                                <input type="hidden" id="id">
                             </div>
                         </div>
             
@@ -128,22 +107,18 @@
                         @include('pembayaran.data')
                     </div>
             
-                </form>
                   </div>
             </div>
 
         </div>
 
     </div>
-    @include('pembayaran.form')
+    </form>
 @endsection
 {{-- @include('pembayaran.data') --}}
 
 @push('js')
     <script>
-        $('.alert-success').fadeTo(2000, 500).slideUp(500, function(){
-            $('.alert-success').slideUp(500)
-        })
         var count=0;
         $('#tambahTransaksi').prop('disabled', true);
         $('#btnSimpan').prop('disabled', true);
@@ -172,11 +147,11 @@
         })
 
         $(document).on('click', '.pilihSiswaBtn', function(){
-            var id_siswa = $(this).data("id_siswa")
+            var id = $(this).data("id")
             var nisn = $(this).data("nisn")
             var nama = $(this).data("nama")
 
-            $('#id_siswa').val(id_siswa)
+            $('#id').val(id)
             $('#nisn').val(nisn)
             $('#nama').val(nama)
          
@@ -210,7 +185,6 @@
             html+="<td>";
             html+=tahun;
             html+="<input type='hidden' value='"+idSpp+"' name='item["+count+"][id_spp]'>";
-            
             html+="</td>";
             html+="<td>";
             html+=nama;

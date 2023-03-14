@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\pembayaran;
 use App\Http\Requests\StorepembayaranRequest;
 use App\Http\Requests\UpdatepembayaranRequest;
+use App\Models\DetailPembayaran;
 use App\Models\grade;
 use App\Models\siswa;
 use App\Models\spp;
+use Illuminate\Http\Request;
 
 class PembayaranController extends Controller
 {
@@ -19,16 +21,17 @@ class PembayaranController extends Controller
     public function index()
     {
         // echo 'Ini halaman pembayaran';
-        return view('pembayaran.index');
-    }
-
-    public function form(){
         $data['siswa'] = siswa::select('grade.nama_kelas', 'spp.tahun', 'siswa.*')->leftJoin
         ('grade', 'grade.id', 'siswa.id_kelas')->leftJoin('spp', 'spp.id', 'siswa.id_spp')->get();
         $data['grade'] = grade::get();
         $data['spp'] = spp::orderByDesc('tahun')->get();
-        return view('pembayaran.form', $data);
+        return view('pembayaran.index')->with($data);
     }
+
+    // public function form(){
+        
+    //     return view('pembayaran.form', $data);
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -48,13 +51,30 @@ class PembayaranController extends Controller
      */
     public function store(StorepembayaranRequest $request)
     {
+        // return $request->item;
+        $data['id_petugas']=auth()->user()->id;
+        $data['id_siswa'] = $request['id_siswa']; 
+        $data['tgl_bayar'] = $request['tgl_bayar'];
+        $input_pembayaran = pembayaran::create($data);
+
+        //input detail pembayaran
+        foreach($request->item as $item){
+            $data2['id_pembayaran'] = $input_pembayaran->id; 
+            // $data2['tahun_bayar'] = $item['tahun_bayar']; 
+            $data2['bulan_bayar'] = $item['bulan_bayar']; 
+            $data2['id_spp'] = $item['id_spp']; 
+            DetailPembayaran::create($data2);
+        }
+        
+
+        return redirect('pembayaran')->with('success', 'Input Transaksi Pembayaran berhasil dilakukan!');
         // $data['nisn']=$request['nisn'];
-        // $data['id_petugas']=auth()->user()->id;
+        
         // $data['tgl_bayar']=date('Y-m-d');
 
         // $input_pembayaran = pembayaran::create($data);
         // return redirect('pembayaran')->with('success', 'Input berhasil!');
-        echo "masuk";
+        
     }
 
     /**

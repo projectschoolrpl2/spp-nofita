@@ -37,11 +37,10 @@
 
                     <div class="form-group row">
                         <label for="level" class="col-sm-4 col-form-label">Level</label>
-                        <select id="level" class="form-select col-sm-8 col-md-7 ml-3" name="level">
-                            <option selected disabled>Pilih Level</option>
-                            <option selected>Admin</option>
-                            <option selected>Petugas</option>
-                        </select>
+                        <div class="col-sm-8">
+                            <input type="text" id="level" class="form-control" 
+                            placeholder="nama" name="level">
+                        </div>
                     </div>
 
                     <div class="form-group row">

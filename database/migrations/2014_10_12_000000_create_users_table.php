@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->string('level', 5);
+            $table->integer('id_person')->unsigned();
             $table->timestamps();
         });
     }

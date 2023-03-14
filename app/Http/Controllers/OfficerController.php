@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Exports\officerExport;
 use App\Imports\OfficerImport;
+use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
 
 class OfficerController extends Controller
@@ -48,15 +49,23 @@ class OfficerController extends Controller
      */
     public function store(StoreofficerRequest $request)
     {
-        DB::beginTransaction();
-        try{
-            officer::create($request->all());
+        //fficer::create($request->all());
+        // DB::beginTransaction();
+        // try{
+            $officer = officer::create($request->all());
+          //input username dan password ke tabel user
+          $data['name'] = $officer->nama_petugas;
+          $data['username'] = $officer->username;
+          $data['password'] = bcrypt($officer->password);
+          $data['level'] = $officer->level;
+          $data['id_person'] = $officer->id;
+          User::create($data);
             return redirect('officer')->with('success', 'Input data petugas berhasil!');
-        }catch(QueryException $e){
-            DB::rollBack();
-            return redirect('spp')->with('error', 'Terjadi Kesalahan query');
-        }
-        DB::commit();
+        // }catch(QueryException $e){
+        //     DB::rollBack();
+        //     return redirect('spp')->with('error', 'Terjadi Kesalahan query');
+        // }
+        // DB::commit();
     }
 
     /**

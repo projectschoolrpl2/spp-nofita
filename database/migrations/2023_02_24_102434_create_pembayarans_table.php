@@ -14,12 +14,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('grade', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_kelas', 10);
-            $table->string('kompetensi_keahlian', 50);
+        Schema::create('pembayaran', function (Blueprint $table) {
+            $table->bigInteger('id')->autoIncrement();
+
+            $table->bigInteger('id_petugas');
+            $table->foreign('id_petugas')->references('id')->on('officer');
+
+            $table->bigInteger('id_siswa');
+            $table->foreign('id_siswa')->references('id')->on('siswa');
+
+            $table->date('tgl_bayar');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
+            
         });
     }
 
@@ -30,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('grade');
+        Schema::dropIfExists('pembayaran');
     }
 };

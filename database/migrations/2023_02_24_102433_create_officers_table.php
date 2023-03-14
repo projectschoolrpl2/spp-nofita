@@ -15,11 +15,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('officer', function (Blueprint $table) {
-            $table->id();
-            $table->string('username', 25);
-            $table->string('password', 32);
+            $table->bigInteger('id')->autoIncrement();
+            $table->string('username');
+            $table->string('password');
             $table->string('nama_petugas', 35);
-            $table->enum('level', ['admin', 'petugas']);
+            $table->string('level', 5);
             $table->enum('jk', ['Laki-Laki','Perempuan']);
             $table->string('no_telp', 13);
             $table->string('alamat', 200);

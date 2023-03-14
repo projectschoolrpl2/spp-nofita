@@ -11,6 +11,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 
 use App\Exports\SiswaExport;
+use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
@@ -33,15 +34,29 @@ class SiswaController extends Controller
     
     public function store(StoresiswaRequest $request)
     {
-        DB::beginTransaction();
-        try{
-            siswa::create($request->all());
+        // dd($request);
+        //siswa::create($request->all());
+
+
+        // DB::beginTransaction();
+        // try{
+        //     siswa::create($request->all());
+            $siswa=siswa::create($request->all());
+
+            //input username dan password ke tabel user
+            $data['name'] = $siswa->nama;
+            $data['username'] = $siswa->nisn;
+            $data['password'] = bcrypt($siswa->nis);
+            $data['level'] = 3;
+            $data['id_person'] = $siswa->id;
+            User::create($data);
+
             return redirect('siswa')->with('success', 'Input data siswa berhasil!');
-        }catch(QueryException $e){
-            DB::rollBack();
-            return redirect('spp')->with('error', 'Terjadi Kesalahan query');
-        }
-        DB::commit();
+        // }catch(QueryException $e){
+        //     DB::rollBack();
+        //     return redirect('spp')->with('error', 'Terjadi Kesalahan query');
+        // }
+        // DB::commit();
     }
 
     public function show(siswa $siswa)

@@ -24,8 +24,7 @@ class StorepembayaranRequest extends FormRequest
     public function rules()
     {
         return [
-            'nisn' => 'required',
-            'id_petugas' => 'required',
+            'id_siswa' => 'required',
             'tgl_bayar'=> 'required',
         ];
     }

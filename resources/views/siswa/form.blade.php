@@ -80,7 +80,7 @@
                         </select>
                     </div>
 
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label for="username" class="col-sm-4 col-form-label">Username</label>
                         <div class="col-sm-8">
                             <input type="text" id="username" class="form-control" 
@@ -94,7 +94,7 @@
                             <input type="password" id="password" class="form-control" 
                             placeholder="password" name="password">
                         </div>
-                    </div>
+                    </div> --}}
 
                     
             </div>
