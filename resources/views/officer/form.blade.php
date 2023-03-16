@@ -80,7 +80,7 @@
 </form>
 
 {{-- form import --}}
-<div class="modal fade" id="ImportOfficer">
+<div class="modal fade" id="formImport">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -89,8 +89,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                
-
+               
                 <form action="{{ route('officer.import') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div id="method"></div>

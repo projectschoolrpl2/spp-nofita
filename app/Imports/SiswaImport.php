@@ -2,12 +2,12 @@
 
 namespace App\Imports;
 
-use App\Models\Officer;
+use App\Models\Siswa;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class OfficerImport implements ToModel, WithHeadingRow
+class SiswaImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -16,15 +16,16 @@ class OfficerImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        return new Officer([
+        return new Siswa([
             'id' => auth()->user()->id,
-            'username' => $row['username'],
-            'password' => $row['password'],
-            'nama_petugas' => $row['nama_petugas'],
-            'level' => $row['level'],
-            'jk' => $row['jk'],
-            'no_telp' => $row['no_telp'],
+            'nisn' => $row['nisn'],
+            'nis' => $row['nis'],
+            'nama' => $row['nama'],
+            'id_kelas' => $row['id_kelas'],
             'alamat' => $row['alamat'],
+            'no_telp' => $row['no_telp'],
+            'id_spp' => $row['id_spp'],
+            'jk' => $row['jk'],
         ]);
     }
 

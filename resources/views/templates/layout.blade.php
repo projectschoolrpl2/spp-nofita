@@ -130,9 +130,14 @@
                             <i class="fa fa-money" aria-hidden="true"></i><span class="nav-text">SPP</span></a>
                         </li>
 
-                        <li><a class="has-arrow" href="{{ url('data_karyawan') }}" aria-expanded="false">
+                        {{-- <li><a class="has-arrow" href="data_karyawan" aria-expanded="false">
                             <i class="fa fa-address-book" aria-hidden="true">
                                 </i><span class="nav-text">Simulasi Data Karyawan</span></a>
+                        </li> --}}
+
+                        <li><a class="has-arrow" href="cucian" aria-expanded="false">
+                            <i class="fa fa-address-book" aria-hidden="true">
+                                </i><span class="nav-text">Simulasi Cucian</span></a>
                         </li>
                         
                         <li class="nav-label">Transactions</li>

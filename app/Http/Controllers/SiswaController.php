@@ -11,6 +11,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 
 use App\Exports\SiswaExport;
+use App\Imports\SiswaImport;
 use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -86,6 +87,13 @@ class SiswaController extends Controller
 
     public function export() 
     {
-        return Excel::download(new SiswaExport, 'siswa.xlsx');
+        $date = date('Y-m-d');
+        return Excel::download(new SiswaExport, $date.'_siswa.xlsx');
+    }
+
+    public function importData(){
+        Excel::import(new SiswaImport, request()->file('import'));
+
+        return redirect('siswa')->with('success', 'Import data Siswa berhasil!');
     }
 }

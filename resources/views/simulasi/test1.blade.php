@@ -13,7 +13,7 @@
                     </div>
 
                     <div class="mt-4 col-sm-12 p-md-0">
-                        <form id="formKaryawan" method="POST">
+                        <form id="formKaryawan">
                             <div class="form-group row">
                                 <label for="id" class="col-sm-4 col-form-label ">ID</label>
                                 <div class="col-sm-8">
@@ -45,9 +45,25 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="gaji" class="col-sm-4 col-form-label">Gaji</label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control" name="gaji" id="gaji"
+                                    placeholder="Gaji" required min="1000000" step="50000" value="100000">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="lembur" class="col-sm-4 col-form-label">Lembur</label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control" name="lembur" id="lembur"
+                                    placeholder="Lembur" required min="0" step="1" value="0">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="nama" class="col-sm-4 col-form-label"></label>
                                 <div class="col-sm-8">
-                                    <button type="button" class="btn btn-primary" 
+                                    <button type="submit" class="btn btn-primary" 
                                     id="btn-insert">Simpan</button>
                                     <button type="reset" class="btn btn-default" >Reset</button>
                                 </div>
@@ -92,12 +108,17 @@
                                         <th>ID</th>
                                         <th>Nama</th>
                                         <th>Jenis Kelamin</th>
+                                        <th>Gaji</th>
+                                        <th>Lembur</th>
+                                        <th>Bonus</th>
+                                        <th>Pajak</th>
+                                        <th>Total Gaji</th>
                                     </tr>
                                 </thead>
     
                                 <tbody>
                                     <tr>
-                                        <td colspan="3" align="center">Belum ada data</td>
+                                        <td colspan="6" align="center">Belum ada data</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -112,22 +133,24 @@
 
 @push('js')
     <script>
+        // harga lembur
+        const hargaLembur = 100000
         // insert data
         // serializeArray untuk mengambil data dari form
         function insertData(dataKaryawan) {
             const data = $('#formKaryawan').serializeArray()
-            // console.log(data)
+            console.log(data)
 
             let newData = {}
             data.forEach(function(item, index){
                 let name = item['name']
                 let value = name === 'id' || 
                             name === 'gaji' ||
-                            name === 'harga'
+                            name === 'lembur'
                             ? Number(item['value']) : item['value']
                 newData[name] = value
             })
-            // console.log(newData)
+            console.log(newData)
             localStorage.setItem('dataKaryawan', JSON.stringify([...dataKaryawan, newData]))
             return newData
         }
@@ -138,14 +161,40 @@
             if(arr.length == null){
                 return row = '<tr><td colspan="3">Belum ada data</td></tr>'
             }
+            let jmlGaji = jmlLembur = jmlTotal = jmlBonus = jmlPajak = 0
             arr.forEach(function(item, index){
-                console.log(item)
+                // console.log(item)
+                
+                let bonus = item['lembur'] >= 10 ? item['gaji'] * 0.5 : 0
+                let pajak = item['gaji'] * 0.1 
+                let total = item['gaji'] + (item['lembur'] * hargaLembur) + bonus - pajak
+                jmlGaji += item['gaji']
+                jmlLembur += item['lembur']
+                jmlBonus += bonus
+                jmlPajak += pajak
+                jmlTotal += total
                 row += `<tr>`
                 row += `<td>${item['id']}</td>`
                 row += `<td>${item['nama']}</td>`
                 row += `<td>${item['jk']}</td>`
+                row += `<td>${item['gaji']}</td>`
+                row += `<td>${item['lembur']}</td>`
+                row += `<td>${bonus}</td>`
+                row += `<td>${pajak}</td>`
+                row += `<td>${total}</td>`
                 row += `</tr>`
+
+                
             })
+
+            row += '<tr style="font-weight:bold;background:#000;color:white;">'
+            row += `<td colspan="3">Jumlah Total</td>`
+            row += `<td>${jmlGaji}</td>`
+            row += `<td>${jmlLembur }</td>`
+            row += `<td>${jmlBonus }</td>`
+            row += `<td>${jmlPajak }</td>`
+            row += `<td>${jmlTotal }</td>`
+            row += '</tr>'
             
             // console.log(row)
             return row
@@ -188,9 +237,10 @@
             $('#btn-insert').on('click', function(){
                 // insertData()
                 // e.preventDefault()
+                //alert('test')
                 dataKaryawan.push(insertData(dataKaryawan))
                 $('#tblKaryawan tbody').html(showData(dataKaryawan))
-                // console.log(dataKaryawan)              
+                console.log(dataKaryawan)              
             })
 
             $('#btn-sorting').on('click', function(){

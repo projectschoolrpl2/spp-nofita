@@ -67,7 +67,7 @@ class PembayaranController extends Controller
         }
         
 
-        return redirect('pembayaran')->with('success', 'Input Transaksi Pembayaran berhasil dilakukan!');
+        return redirect('history')->with('success', 'Input Transaksi Pembayaran berhasil dilakukan!');
         // $data['nisn']=$request['nisn'];
         
         // $data['tgl_bayar']=date('Y-m-d');

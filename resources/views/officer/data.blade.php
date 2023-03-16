@@ -21,7 +21,7 @@
                     <td>{{ $of->username }}</td>
                     <td>{{ $of->password }}</td>
                     <td>{{ $of->nama_petugas }}</td>
-                    <td>{{ $of->level }}</td>
+                    <td>{{ ($of->level == 1)? 'Admin' : 'Petugas' }}</td>
                     <td>{{ $of->jk }}</td>
                     <td>{{ $of->no_telp }}</td>
                     <td>{{ $of->alamat }}</td>

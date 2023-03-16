@@ -10,7 +10,7 @@
                 <div class="col-sm-6 p-md-0">
                     <div class="welcome-text">
                         <h4>Hi, welcome to</h4>
-                        <p class="mb-0">History Pages</p>
+                        <p class="mb-0">Class Pages</p>
                     </div>
                 </div>
 
@@ -45,9 +45,27 @@
                             </button>
                         </div>
                     @endif
-                    
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-rounded btn-outline-primary" data-toggle="modal" 
+                    data-target="#gradeModal">
+                        <i class="fa fa-plus"></i> Tambah Data Kelas
+                    </button>
+
+                    <a href="{{ route('grade.export') }}">
+                        <button type="button" class="btn btn-rounded btn-outline-success ml-2">
+                            <i class="fa fa-file-excel-o"></i> Export
+                        </button>
+                    </a>
+
+                    <button type="button" class="btn btn-rounded btn-outline-warning ml-2"
+                    data-toggle="modal" 
+                    data-target="#gradeImport">
+                        <i class="fa fa-file-excel-o"></i> Import
+                    </button>
+
                     <div class="mt-3">
-                        @include('history.data')
+                        {{-- @include('grade.data') --}}
                     </div>
                 </div>
                 
@@ -57,11 +75,4 @@
 
     </div>
 @endsection
-
-@push('js')
-    <script>
-        $('.alert-success').fadeTo(2000, 500).slideUp(500, function(){
-            $('.alert-success').slideUp(500)
-        })
-    </script>
-@endpush
+{{-- @include('grade.form') --}}

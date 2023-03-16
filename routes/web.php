@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CucianController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OfficerController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SimulasiController;
+
 
 // Route::get('login', [LoginController::class, 'index'])->name('login');
 
@@ -40,6 +42,7 @@ Route::group(['middleware' => ['auth']], function(){
         // Route::get('history', [HistoryController::class, 'index']);
         Route::get('laporan', [LaporanController::class, 'index']);
         Route::get('data_karyawan', [SimulasiController::class, 'index']);
+        Route::get('cucian', [CucianController::class, 'index']);
     });
 
     Route::group(['middleware' => ['cekUserLogin:2']], function(){
@@ -61,6 +64,7 @@ Route::get('officer-export', [OfficerController::class, 'exportData'])->name('of
 Route::post('officer-import', [OfficerController::class, 'importData'])->name('officer.import');
 
 Route::get('siswa-export', [SiswaController::class, 'export'])->name('siswa.export');
+Route::post('siswa-import', [SiswaController::class, 'importData'])->name('siswa.import');
 
 Route::get('grade-export', [GradeController::class, 'exportData'])->name('grade.export');
 Route::post('grade-import', [GradeController::class, 'importData'])->name('grade.import');
