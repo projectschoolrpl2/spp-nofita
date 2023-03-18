@@ -116,7 +116,7 @@
                                 <button type="button" class="btn btn-rounded 
                                 btn-outline-warning 
                                 pilihSppBtn" data-dismiss="modal" data-id="{{ $i }}" 
-                                data-nama="{{ getBulan($i) }}">
+                                data-nama="{{ getBulan($i) }}" id="{{ getBulan($i) }}">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </td>

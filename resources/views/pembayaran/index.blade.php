@@ -207,23 +207,27 @@
             var nominal=$("#nominal").val();
             var html='';
             html+="<tr id='row"+count+"'>";
+
             html+="<td>";
             html+=tahun;
-            html+="<input type='hidden' value='"+idSpp+"' name='item["+count+"][id_spp]'>";
-            
+            html+="<input type='hidden' value='"+idSpp+"' name='item["+count+"][id_spp]'>";         
             html+="</td>";
+
             html+="<td>";
             html+=nama;
-            html+="<input type='hidden' value='"+nama+"' name='item["+count+"][bulan_bayar]'>";
+            html+="<input type='hidden' value='"+nama+"' name='item["+count+"][bulan_bayar]' id='item["count"]'>";
             html+="</td>";
+
             html+="<td>";
             html+=nominal;
             html+="<input type='hidden' value='"+nominal+"' name='item["+count+"][nominal]' class='nominal'>";
             html+="</td>";
+
             html+="<td>";
             html+="<button type='button' class='btn btn-danger hapusBulan' data-id='"+count+"'>";
             html+="<i class='fa fa-trash'></i></button>";
             html+="</td>";
+
             html+="</tr>"
 
             $("#buff").remove();
@@ -231,12 +235,14 @@
             $('#btnSimpan').prop('disabled', false);
 
             getTotalBayar();
+
+            
         })
 
-        // $(document).on('click', '.pilihSppBtn', function(){
-        //     console.log('test')
+        // $(document).on('change', '.pilihSppBtn', function(){
+            
         // })
-       
+        
         function getTotalBayar(){
             var total=0;
             var nominal=document.querySelectorAll('.nominal');
@@ -246,5 +252,7 @@
             $("#total_bayar").val(total);
             $("#total_bayar_label").html(total);
         }
+
+        
     </script>
 @endpush

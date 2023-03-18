@@ -244,14 +244,14 @@
             })
 
             $('#btn-sorting').on('click', function(){
-                dataKaryawan = sorting(dataKaryawan, 'nama')
+                dataKaryawan = sorting(dataKaryawan, 'id')
                 // localStorage.setItem('dataKaryawan', JSON.stringify([...dataKaryawan, newData]))
                 $('#tblKaryawan tbody').html(showData(dataKaryawan))
             })
 
             $('#btn-cari').on('click', function(){
                 let teksSearch = $('#teks-cari').val()
-                let id = searching(dataKaryawan,'nama', teksSearch)
+                let id = searching(dataKaryawan,'id', teksSearch)
                 let data = []
                 if(id >= 0)
                 data.push(dataKaryawan[id])

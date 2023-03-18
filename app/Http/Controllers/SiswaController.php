@@ -73,6 +73,12 @@ class SiswaController extends Controller
     public function update(UpdatesiswaRequest $request, siswa $siswa)
     {
         $siswa->update($request->all());
+        // $data['name'] = $siswa->nama;
+        // $data['username'] = $siswa->nisn;
+        // $data['password'] = bcrypt($siswa->nis);
+        // $data['level'] = 3;
+        // $data['id_person'] = $siswa->id;
+        // User::update($data);
 
         return redirect('siswa')->with('success', 'Success !! The student data has been updated');
     }

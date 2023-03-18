@@ -40,7 +40,7 @@
                         <select id="id_kelas" class="form-select col-sm-8 col-md-7 ml-3" name="id_kelas">
                             <option selected disabled>Pilih Kelas</option>
                             @foreach ($grade as $g)
-                                <option value="{{ $g->id }}">{{ $g->nama_kelas }}</option>
+                            <option value="{{ $g->id }}">{{ $g->nama_kelas }}</option>
                             @endforeach
                         </select>
                     </div>
